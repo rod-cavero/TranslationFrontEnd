@@ -1,0 +1,42 @@
+<br /><br />
+<form [formGroup]="translationForm" (ngSubmit)="onSubmit()">
+  <table>
+    <tr>
+      <td>
+        <div>
+          <input type="radio" id="en" name="sl" value="auto" checked="checked" formControlName="sourceLanguage">
+          <label for="auto">Detect Language</label>&nbsp;&nbsp;
+          <input type="radio" id="en" name="sl" value="en" formControlName="sourceLanguage">
+          <label for="en">English</label>&nbsp;&nbsp;
+          <input type="radio" id="de" name="sl" value="de" formControlName="sourceLanguage">
+          <label for="de">German</label>&nbsp;&nbsp;
+          <input type="radio" id="fr" name="sl" value="fr" formControlName="sourceLanguage">
+          <label for="fr">French</label>
+        </div>
+        <br />
+        <textarea rows="10" cols="60" formControlName="text"></textarea>
+        <!--[(ngModel)]="translationText" name="translationText">-->
+      </td>
+      <td>
+        <div>
+          <input type="radio" id="en" name="tl" value="en" checked="checked" formControlName="targetLanguage">
+          <label for="en">English</label>&nbsp;&nbsp;
+          <input type="radio" id="de" name="tl" value="de" formControlName="targetLanguage">
+          <label for="de">German</label>&nbsp;&nbsp;
+          <input type="radio" id="fr" name="tl" value="fr" formControlName="targetLanguage">
+          <label for="fr">French</label>
+        </div>
+        <br />
+        <p id="target"> {{ translatedText }} </p>
+        <br />
+        <p> <strong>{{ detected }}</strong> {{ source }} </p>
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="translate()" >Translate</button>
+      </td>
+    </tr>
+  </table>
+</form>

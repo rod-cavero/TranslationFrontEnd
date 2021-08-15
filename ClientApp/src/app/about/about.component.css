@@ -1,0 +1,24 @@
+#avatar {
+  height: 60px;
+  width: 60px;
+}
+
+table {
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  padding: 20%;
+}
+
+thead {
+  background-color: #52CBDC;
+  color: white;
+}
+
+div {
+  padding: 5%;
+}
+
+a {
+  color: #52CBDC;
+}
