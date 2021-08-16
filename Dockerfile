@@ -16,9 +16,9 @@ FROM build AS publish
 RUN dotnet publish "TranslationFrontEnd.csproj" -c Release -o /app/publish
 
 
-# Compilar Angular
+# compile Angular
 FROM node:14-slim as nodebuilder
- # Establecer directorio de trabajo angular
+# set the working directory for angular
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 # add `/usr/src/app/node_modules/.bin` to $PATH

@@ -20,18 +20,23 @@ var HomeComponent = /** @class */ (function () {
     function HomeComponent(http, baseUrl, fb) {
         this.http = http;
         this.fb = fb;
+        //variables to be expost in the template
         this.translatedText = '';
         this.detected = '';
         this.source = '';
         this.translationForm = this.fb.group({
+            //set the controls from the form
             text: ['', forms_1.Validators.required],
             sourceLanguage: ['auto', forms_1.Validators.required],
             targetLanguage: ['en', forms_1.Validators.required]
         });
+        //set the url assuming both services are running in the same machine
+        //this is only por demo porpuses
         this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(':')) + ':5000/api/Translation';
         //this.translateServiceUrl = baseUrl + 'api/Translation';
     }
     Object.defineProperty(HomeComponent.prototype, "textc", {
+        //getters for all the controls in the form
         get: function () {
             return this.translationForm.get('text');
         },
@@ -54,13 +59,17 @@ var HomeComponent = /** @class */ (function () {
     });
     HomeComponent.prototype.Translate = function () {
         var _this = this;
+        //validete that the user had introduce some text and select target language
         if (this.translationForm.valid) {
+            //set the query string to invoke the service
             var params = new http_1.HttpParams();
             params = params.append('text', this.textc.value);
             params = params.append('target', this.tlc.value);
             params = params.append('source', this.slc.value);
+            //call the service
             this.http.get(this.translateServiceUrl, { params: params }).subscribe(function (result) {
                 _this.translation = result;
+                // set the result in the UI
                 _this.translatedText = _this.translation.translated;
                 _this.detected = 'Detected Language: ';
                 _this.source = _this.translation.detectedLanguage;
