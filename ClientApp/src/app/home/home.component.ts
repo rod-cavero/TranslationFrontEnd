@@ -13,7 +13,7 @@ export class HomeComponent {
   public detected = '';
   public source = '';
   private translateServiceUrl: string;
-    public translation: Translation;
+  private translation: Translation;
 
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {

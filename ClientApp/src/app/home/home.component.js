@@ -28,8 +28,8 @@ var HomeComponent = /** @class */ (function () {
             sourceLanguage: ['auto', forms_1.Validators.required],
             targetLanguage: ['en', forms_1.Validators.required]
         });
-        //this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(":")) + ":5000/api/Translation?text=hola,target=en";
-        this.translateServiceUrl = baseUrl + 'api/Translation';
+        this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(':')) + ':5000/api/Translation';
+        //this.translateServiceUrl = baseUrl + 'api/Translation';
     }
     Object.defineProperty(HomeComponent.prototype, "textc", {
         get: function () {
