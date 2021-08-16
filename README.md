@@ -28,7 +28,7 @@ Cick on Translate
 
 Prerequisites
 ====
-* TranslationApi image running on port 5000 
+* TranslationApi container running on port 5000 
 ```
 docker pull ghcr.io/rod-cavero/translationapi:master
 ```
