@@ -17,7 +17,6 @@ var app_component_1 = require("./app.component");
 var nav_menu_component_1 = require("./nav-menu/nav-menu.component");
 var home_component_1 = require("./home/home.component");
 var about_component_1 = require("./about/about.component");
-var counter_component_1 = require("./counter/counter.component");
 var fetch_data_component_1 = require("./fetch-data/fetch-data.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -29,7 +28,6 @@ var AppModule = /** @class */ (function () {
                 nav_menu_component_1.NavMenuComponent,
                 home_component_1.HomeComponent,
                 about_component_1.AboutComponent,
-                counter_component_1.CounterComponent,
                 fetch_data_component_1.FetchDataComponent
             ],
             imports: [
@@ -40,7 +38,6 @@ var AppModule = /** @class */ (function () {
                 router_1.RouterModule.forRoot([
                     { path: '', component: home_component_1.HomeComponent, pathMatch: 'full' },
                     { path: 'about', component: about_component_1.AboutComponent },
-                    { path: 'counter', component: counter_component_1.CounterComponent },
                     { path: 'fetch-data', component: fetch_data_component_1.FetchDataComponent },
                 ])
             ],

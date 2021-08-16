@@ -7,11 +7,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FetchDataComponent {
   public forecasts: WeatherForecast[];
+  public x: Translation;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+    http.get<any>('http://localhost:5000/api/Translation?text=hola&target=en').subscribe(result => {
+      console.log(result);
+
+    }, error => {
+      console.error(error);
+    }
+    );
   }
 }
 
@@ -20,4 +25,9 @@ interface WeatherForecast {
   temperatureC: number;
   temperatureF: number;
   summary: string;
+}
+
+interface Translation {
+  detectedLanguage: string;
+  translated: string;
 }

@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Inject} from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -11,15 +11,24 @@ export class HomeComponent {
   public translatedText = '';
   public detected = '';
   public source = '';
+  private translateServiceUrl: string;
 
-  isSubmitted = false;
 
-  constructor(public fb: FormBuilder) {}
+  public translation: Translation;
+
+
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
+    //this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(":")) + ":5000/api/Translation?text=hola,target=en";
+    this.translateServiceUrl = baseUrl + 'api/Translation?text=hola,target=en';
+  }
+
+
+
 
   translationForm: FormGroup = this.fb.group({
     text: ['', Validators.required],
-    sourceLanguage: ['', Validators.required],
-    targetLanguage: ['', Validators.required]
+    sourceLanguage: ['auto', Validators.required],
+    targetLanguage: ['en', Validators.required]
   });
 
   get textc() {
@@ -32,14 +41,30 @@ export class HomeComponent {
     return this.translationForm.get('targetLanguage') as FormControl;
   }
   
-  public translate() {
+  public onSubmit() {
     if (this.translationForm.valid) {
-      this.translatedText = this.textc.value;
-      this.detected = this.slc.value;
-      this.source = this.tlc.value;
+      //let params = new HttpParams();
+      //params = params.append('text', this.textc.value);
+      //params = params.append('target', this.tlc.value);
+      //params = params.append('source', this.slc.value);
+      //this.http.get<Translation>(this.translateServiceUrl).subscribe(result => {
+      //  this.translation = result;
+      //}, error => console.error(error));
+  
+
+
+      //this.translatedText = this.translation.translated;
+      //this.detected = 'Detected Language:';
+      //this.source = this.translation.detectedLanguage;
     }
   }
     
 
- }
+}
+
+interface Translation {
+  detectedLanguage: string;
+  translated: string;
+}
+
 

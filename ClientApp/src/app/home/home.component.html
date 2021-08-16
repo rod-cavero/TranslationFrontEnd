@@ -4,13 +4,13 @@
     <tr>
       <td>
         <div>
-          <input type="radio" id="en" name="sl" value="auto" checked="checked" formControlName="sourceLanguage">
+          <input type="radio" id="en" name="source" value="auto" checked="checked" formControlName="sourceLanguage">
           <label for="auto">Detect Language</label>&nbsp;&nbsp;
-          <input type="radio" id="en" name="sl" value="en" formControlName="sourceLanguage">
+          <input type="radio" id="en" name="source" value="en" formControlName="sourceLanguage">
           <label for="en">English</label>&nbsp;&nbsp;
-          <input type="radio" id="de" name="sl" value="de" formControlName="sourceLanguage">
+          <input type="radio" id="de" name="source" value="de" formControlName="sourceLanguage">
           <label for="de">German</label>&nbsp;&nbsp;
-          <input type="radio" id="fr" name="sl" value="fr" formControlName="sourceLanguage">
+          <input type="radio" id="fr" name="source" value="fr" formControlName="sourceLanguage">
           <label for="fr">French</label>
         </div>
         <br />
@@ -19,11 +19,11 @@
       </td>
       <td>
         <div>
-          <input type="radio" id="en" name="tl" value="en" checked="checked" formControlName="targetLanguage">
+          <input type="radio" id="en" name="target" value="en" checked="checked" formControlName="targetLanguage">
           <label for="en">English</label>&nbsp;&nbsp;
-          <input type="radio" id="de" name="tl" value="de" formControlName="targetLanguage">
+          <input type="radio" id="de" name="target" value="de" formControlName="targetLanguage">
           <label for="de">German</label>&nbsp;&nbsp;
-          <input type="radio" id="fr" name="tl" value="fr" formControlName="targetLanguage">
+          <input type="radio" id="fr" name="target" value="fr" formControlName="targetLanguage">
           <label for="fr">French</label>
         </div>
         <br />
@@ -35,7 +35,7 @@
     </tr>
     <tr>
       <td>
-        <button type="button" class="btn btn-primary" (click)="translate()" >Translate</button>
+        <button type="submit" class="btn btn-primary" >Translate</button>
       </td>
     </tr>
   </table>
