@@ -1,6 +1,7 @@
 import { Component, Inject} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Translation } from '../interfaces/translation.interface';
 
 @Component({
   selector: 'app-home',
@@ -12,18 +13,13 @@ export class HomeComponent {
   public detected = '';
   public source = '';
   private translateServiceUrl: string;
-
-
-  public translation: Translation;
+    public translation: Translation;
 
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
-    //this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(":")) + ":5000/api/Translation?text=hola,target=en";
-    this.translateServiceUrl = baseUrl + 'api/Translation?text=hola,target=en';
+    this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(':')) + ':5000/api/Translation';
+    //this.translateServiceUrl = baseUrl + 'api/Translation';
   }
-
-
-
 
   translationForm: FormGroup = this.fb.group({
     text: ['', Validators.required],
@@ -41,30 +37,27 @@ export class HomeComponent {
     return this.translationForm.get('targetLanguage') as FormControl;
   }
   
-  public onSubmit() {
+  public Translate() {
     if (this.translationForm.valid) {
-      //let params = new HttpParams();
-      //params = params.append('text', this.textc.value);
-      //params = params.append('target', this.tlc.value);
-      //params = params.append('source', this.slc.value);
-      //this.http.get<Translation>(this.translateServiceUrl).subscribe(result => {
-      //  this.translation = result;
-      //}, error => console.error(error));
-  
+      let params = new HttpParams();
+      params = params.append('text', this.textc.value);
+      params = params.append('target', this.tlc.value);
+      params = params.append('source', this.slc.value);
 
-
-      //this.translatedText = this.translation.translated;
-      //this.detected = 'Detected Language:';
-      //this.source = this.translation.detectedLanguage;
+      this.http.get<Translation>(this.translateServiceUrl, {params: params}).subscribe(result => {
+        this.translation = result;
+        this.translatedText = this.translation.translated;
+        this.detected = 'Detected Language: ';
+        this.source = this.translation.detectedLanguage;
+      }, error => {
+        console.error(error)
+      });
     }
   }
     
 
 }
 
-interface Translation {
-  detectedLanguage: string;
-  translated: string;
-}
+
 
 

@@ -29,7 +29,7 @@ var HomeComponent = /** @class */ (function () {
             targetLanguage: ['en', forms_1.Validators.required]
         });
         //this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(":")) + ":5000/api/Translation?text=hola,target=en";
-        this.translateServiceUrl = baseUrl + 'api/Translation?text=hola,target=en';
+        this.translateServiceUrl = baseUrl + 'api/Translation';
     }
     Object.defineProperty(HomeComponent.prototype, "textc", {
         get: function () {
@@ -52,18 +52,21 @@ var HomeComponent = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    HomeComponent.prototype.onSubmit = function () {
+    HomeComponent.prototype.Translate = function () {
+        var _this = this;
         if (this.translationForm.valid) {
-            //let params = new HttpParams();
-            //params = params.append('text', this.textc.value);
-            //params = params.append('target', this.tlc.value);
-            //params = params.append('source', this.slc.value);
-            //this.http.get<Translation>(this.translateServiceUrl).subscribe(result => {
-            //  this.translation = result;
-            //}, error => console.error(error));
-            //this.translatedText = this.translation.translated;
-            //this.detected = 'Detected Language:';
-            //this.source = this.translation.detectedLanguage;
+            var params = new http_1.HttpParams();
+            params = params.append('text', this.textc.value);
+            params = params.append('target', this.tlc.value);
+            params = params.append('source', this.slc.value);
+            this.http.get(this.translateServiceUrl, { params: params }).subscribe(function (result) {
+                _this.translation = result;
+                _this.translatedText = _this.translation.translated;
+                _this.detected = 'Detected Language: ';
+                _this.source = _this.translation.detectedLanguage;
+            }, function (error) {
+                console.error(error);
+            });
         }
     };
     HomeComponent = __decorate([
