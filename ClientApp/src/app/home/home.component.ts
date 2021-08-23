@@ -19,29 +19,29 @@ export class HomeComponent {
   private translation: Translation;
 
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private formBuilder: FormBuilder) {
     //set the url assuming both services are running in the same machine
     //this is only por demo porpuses
     this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(':')) + ':5000/api/Translation';
     //this.translateServiceUrl = baseUrl + 'api/Translation';
   }
 
-  translationForm: FormGroup = this.fb.group({
+  translationForm: FormGroup = this.formBuilder.group({
     //set the controls from the form
-    text: ['', Validators.required],
-    sourceLanguage: ['auto', Validators.required],
-    targetLanguage: ['en', Validators.required]
+    textControl: ['', Validators.required],
+    sourceLanguageControl: ['auto', Validators.required],
+    targetLanguageControl: ['en', Validators.required]
   });
 
   //getters for all the controls in the form
-  get textc() {
-    return this.translationForm.get('text') as FormControl;
+  get textControl() {
+    return this.translationForm.get('textControl') as FormControl;
   }
-  get slc() {
-    return this.translationForm.get('sourceLanguage') as FormControl;
+  get sourceLanguageControl() {
+    return this.translationForm.get('sourceLanguageControl') as FormControl;
   }
-  get tlc() {
-    return this.translationForm.get('targetLanguage') as FormControl;
+  get targetLanguageControl() {
+    return this.translationForm.get('targetLanguageControl') as FormControl;
   }
 
 
@@ -50,9 +50,9 @@ export class HomeComponent {
     if (this.translationForm.valid) {
       //set the query string to invoke the service
       let params = new HttpParams();
-      params = params.append('text', this.textc.value);
-      params = params.append('target', this.tlc.value);
-      params = params.append('source', this.slc.value);
+      params = params.append('text', this.textControl.value);
+      params = params.append('target', this.targetLanguageControl.value);
+      params = params.append('source', this.sourceLanguageControl.value);
 
       //call the service
       this.http.get<Translation>(this.translateServiceUrl, {params: params}).subscribe(result => {

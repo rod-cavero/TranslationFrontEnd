@@ -17,42 +17,42 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var forms_1 = require("@angular/forms");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(http, baseUrl, fb) {
+    function HomeComponent(http, baseUrl, formBuilder) {
         this.http = http;
-        this.fb = fb;
+        this.formBuilder = formBuilder;
         //variables to be expost in the template
         this.translatedText = '';
         this.detected = '';
         this.source = '';
-        this.translationForm = this.fb.group({
+        this.translationForm = this.formBuilder.group({
             //set the controls from the form
-            text: ['', forms_1.Validators.required],
-            sourceLanguage: ['auto', forms_1.Validators.required],
-            targetLanguage: ['en', forms_1.Validators.required]
+            textControl: ['', forms_1.Validators.required],
+            sourceLanguageControl: ['auto', forms_1.Validators.required],
+            targetLanguageControl: ['en', forms_1.Validators.required]
         });
         //set the url assuming both services are running in the same machine
         //this is only por demo porpuses
         this.translateServiceUrl = baseUrl.substr(0, baseUrl.lastIndexOf(':')) + ':5000/api/Translation';
         //this.translateServiceUrl = baseUrl + 'api/Translation';
     }
-    Object.defineProperty(HomeComponent.prototype, "textc", {
+    Object.defineProperty(HomeComponent.prototype, "textControl", {
         //getters for all the controls in the form
         get: function () {
-            return this.translationForm.get('text');
+            return this.translationForm.get('textControl');
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(HomeComponent.prototype, "slc", {
+    Object.defineProperty(HomeComponent.prototype, "sourceLanguageControl", {
         get: function () {
-            return this.translationForm.get('sourceLanguage');
+            return this.translationForm.get('sourceLanguageControl');
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(HomeComponent.prototype, "tlc", {
+    Object.defineProperty(HomeComponent.prototype, "targetLanguageControl", {
         get: function () {
-            return this.translationForm.get('targetLanguage');
+            return this.translationForm.get('targetLanguageControl');
         },
         enumerable: false,
         configurable: true
@@ -63,9 +63,9 @@ var HomeComponent = /** @class */ (function () {
         if (this.translationForm.valid) {
             //set the query string to invoke the service
             var params = new http_1.HttpParams();
-            params = params.append('text', this.textc.value);
-            params = params.append('target', this.tlc.value);
-            params = params.append('source', this.slc.value);
+            params = params.append('text', this.textControl.value);
+            params = params.append('target', this.targetLanguageControl.value);
+            params = params.append('source', this.sourceLanguageControl.value);
             //call the service
             this.http.get(this.translateServiceUrl, { params: params }).subscribe(function (result) {
                 _this.translation = result;
